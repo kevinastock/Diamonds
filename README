@@ -4,4 +4,4 @@ make
 
 To run:
 
-./diamonds < simpleton.level
+./diamonds < levels/simpleton.level
