@@ -1,6 +1,6 @@
 #include "iface.h"
 
-#define WAITMS 300 
+#define WAITMS 20 
 Uint32 lct = 0;
 
 Uint32 chill() {
@@ -29,7 +29,7 @@ void drawbox(SDL_Surface *screen, int x, int y, int w, int h, Uint32 r, Uint32 g
 
 int main(int argc, char** argv) {
   game_state* gs;
-  gs = game_load(stdin,3.0,3.0,1.6,.07,.1);
+  gs = game_load(stdin,9.0,9.0,1.6,.07,.1);
   game_init(gs,6);
 
   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) < 0) {

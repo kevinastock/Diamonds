@@ -50,6 +50,10 @@ void game_bounce_ball(game_state* gs, game_direction d) {
 // Return 1 if bouncing off this tile, 0 if going through
 int game_hit_tile(game_state* gs, int x, int y, int* react) {
   game_tile* t;
+  if (x<0 || y<0 || x>=gs->config.x || y>=gs->config.y) {
+    printf("%d %d is not in level\n",x,y);
+    exit(1);
+  }
   t = &gs->tiles[gs->config.x * y + x];
   *react = 1;
   switch (t->type) {
@@ -178,7 +182,7 @@ void game_update(game_state* gs, float dt) { // Note that this algorithm will br
     dt -= ttxw;
     ttyw -= ttxw;
     // Attempt hitting the tile we're closest to
-    int ty1,ty2,react;
+    int ty1,ty2,react=1;
     ty1 = floor(gs->ball.y - gs->config.ball_size);
     ty2 = floor(gs->ball.y + gs->config.ball_size);
     game_direction td = gs->ball.dir;
@@ -201,7 +205,7 @@ void game_update(game_state* gs, float dt) { // Note that this algorithm will br
     game_move_ball(gs,ttyw);
     dt -= ttyw;
     ttxw -= ttyw;
-    int tx1,tx2,react;
+    int tx1,tx2,react=1;
     tx1 = floor(gs->ball.x - gs->config.ball_size/gs->config.aspect);
     tx2 = floor(gs->ball.x + gs->config.ball_size/gs->config.aspect);
     game_direction td = gs->ball.dir;
